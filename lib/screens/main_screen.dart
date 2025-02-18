@@ -51,10 +51,21 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
-      body: ListView.builder(
+      body: PageView.builder(
           itemCount: facts.length,
           itemBuilder: (BuildContext context, int index) {
-            return Text(facts[index]);
+            return Container(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    facts[index],
+                    style: TextStyle(fontSize: 35),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            );
           }),
     );
   }
