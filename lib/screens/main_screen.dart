@@ -51,6 +51,11 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
+      body: ListView.builder(
+          itemCount: facts.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Text(facts[index]);
+          }),
     );
   }
 }
