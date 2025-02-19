@@ -13,6 +13,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   List<dynamic> facts = [];
+  bool isLoading = true;
 
   Future<void> getData() async {
     try {
@@ -20,8 +21,10 @@ class _MainScreenState extends State<MainScreen> {
           "https://raw.githubusercontent.com/MossesAryo/flutter_dummy_api/refs/heads/main/facts.json");
 
       facts = jsonDecode(response.data);
+      isLoading = false;
       setState(() {});
     } catch (e) {
+      isLoading = false;
       print(e);
     }
   }
@@ -54,23 +57,27 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Column(children: [
         Expanded(
-          child: PageView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: facts.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        facts[index],
-                        style: TextStyle(fontSize: 35),
-                        textAlign: TextAlign.center,
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : PageView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: facts.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            facts[index],
+                            style: TextStyle(fontSize: 35),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              }),
+                    );
+                  }),
         ),
         Container(
           child: Text("Swipe Left For More"),
