@@ -33,7 +33,7 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
                     
 
                     themeProvider.updateMode(darkMode: value);
-                    setState(() {});
+                   
                   }),
               SizedBox(
                 width: 20,
